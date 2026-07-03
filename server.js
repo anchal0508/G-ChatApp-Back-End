@@ -10,13 +10,17 @@ app.use(cors({
     credentials: true,
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders: 
-    [    'Contenet-Type', 'Authorization']
+    [    'Content-Type', 'Authorization']
     
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
+const userRouter = require('./routers/userRouter');
+
+app.use('/api/users', userRouter);
 
 
 app.use((err, req, res, next) => {
