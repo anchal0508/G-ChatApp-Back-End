@@ -3,9 +3,9 @@ const { sendChat , myMessage} = require('../services/chatServices');
 const addChat = async (req, res, next) => {
     try {
         const { message } = req.body;
-        const id = req.user.id;
+        const user = req.user;
 
-        const response = await sendChat({ message, id });
+        const response = await sendChat({ message, userId });
 
         return res.status(200).json({
             success: true,
