@@ -5,9 +5,9 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const db = require('./models/index');
 
-const http = require('http'); 
+const http = require('http');
 
-const { Server } = require('socket.io'); 
+const { Server } = require('socket.io');
 
 
 app.use(cors({
