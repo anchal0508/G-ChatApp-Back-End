@@ -19,8 +19,10 @@ app.use(cookieParser());
 
 
 const userRouter = require('./routers/userRouter');
+const chatRouter = require('./routers/chatRouter');
 
 app.use('/api/users', userRouter);
+app.use('/api/chats', chatRouter);
 
 
 app.use((err, req, res, next) => {
