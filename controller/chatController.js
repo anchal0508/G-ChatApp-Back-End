@@ -21,7 +21,7 @@ const addChat = async (req, res, next) => {
 const getMessage = async (req, res, next) => {
     try {
         const id = req.user.id;
-        const userName = req.user.name;
+        const senderName = req.user.name;
 
         const response = await myMessage({ id });
 
@@ -29,7 +29,7 @@ const getMessage = async (req, res, next) => {
             success: true,
             message: 'message recieved',
             data: response,
-            senderName: userName
+            senderName: senderName
         })
     } catch (error) {
         next(error);
