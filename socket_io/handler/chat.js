@@ -5,6 +5,7 @@ module.exports = (socket, io) => {
 
     socket.on('send_message', (msg) => {
         socket.broadcast.emit('receive_message', msg);
+        // console.log("User", socket.user.senderName, "said:", msg);
     });
 
     socket.on('disconnect', () => {

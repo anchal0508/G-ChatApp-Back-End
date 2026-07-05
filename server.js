@@ -4,6 +4,8 @@ const app = express();
 const db = require('./models/index');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+
+
 const http = require('http');
 const server = http.createServer(app);
 const sockteIO = require('./socket_io/index');
@@ -19,10 +21,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-
-
-
+const myCookieParser = cookieParser();
 
 
 const userRouter = require('./routers/userRouter');
@@ -32,7 +31,6 @@ const chatRouter = require('./routers/chatRouter');
 app.use('/api/users', userRouter);
 app.use('/api/chats', chatRouter);
 
-const myCookieParser = cookieParser();
 
 app.use(myCookieParser);
 const io = sockteIO(server);
