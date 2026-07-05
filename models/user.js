@@ -2,8 +2,7 @@
 
 const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
-const {Chat}= require('./index');
-
+555
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -14,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Chat, {
         foreignKey: 'userId',
-        as: 'chats'
+        as: 'chats',
+        onDelete: 'CASCAD'
       });
     }
   }

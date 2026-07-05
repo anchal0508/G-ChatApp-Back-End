@@ -3,16 +3,12 @@ const { Chat } = require('../models/index');
 const sendChat = async (chatMessage) => {
     return await Chat.create({
         message: chatMessage.message,
-        userId: chatMessage.id  
+        userId: chatMessage.userId  
     });
 }
 
 const myMessage = async (userId) => {
-    const response = await Chat.findAll({
-        where: {
-            userId:userId.id
-        }
-    });
+    const response = await Chat.findAll();
 
     return response;
 }

@@ -1,16 +1,17 @@
-const { sendChat , myMessage} = require('../services/chatServices');
+const { sendChat, myMessage } = require('../services/chatServices');
 
 const addChat = async (req, res, next) => {
     try {
         const { message } = req.body;
-        const user = req.user;
+        const userId = req.user.id;
+        const senderName = req.user.name;
 
-        const response = await sendChat({ message, userId });
-
+        const response = await sendChat({message, userId})
         return res.status(200).json({
             success: true,
             message: 'Message Sent...',
-            data: response
+            data: response,
+            senderName: senderName
         });
     } catch (error) {
         next(error);
@@ -20,13 +21,15 @@ const addChat = async (req, res, next) => {
 const getMessage = async (req, res, next) => {
     try {
         const id = req.user.id;
-        
-        const response = await myMessage({id});
+        const userName = req.user.name;
+
+        const response = await myMessage({ id });
 
         return res.status(200).json({
             success: true,
             message: 'message recieved',
-            data: response
+            data: response,
+            senderName: userName
         })
     } catch (error) {
         next(error);
