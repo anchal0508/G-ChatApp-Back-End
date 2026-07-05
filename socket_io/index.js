@@ -1,6 +1,7 @@
 const { Server } = require('socket.io');
 const socketAuth = require('./middleware');
 const chatHandler = require('./handler/chat');
+const cookieParser = require('cookie-parser');
 
 module.exports = (server) => {
 
@@ -14,6 +15,9 @@ module.exports = (server) => {
 
     });
 
+  
+    
+   
     socketAuth(io);
 
 
@@ -22,6 +26,6 @@ io.on('connection', socket => {
    chatHandler(socket, io);
 });
 
-
+return io;
 
 }

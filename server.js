@@ -20,15 +20,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-sockteIO(server);
+
+
 
 
 
 const userRouter = require('./routers/userRouter');
 const chatRouter = require('./routers/chatRouter');
 
+
 app.use('/api/users', userRouter);
 app.use('/api/chats', chatRouter);
+
+const myCookieParser = cookieParser();
+
+app.use(myCookieParser);
+const io = sockteIO(server);
+io.engine.use(myCookieParser);
+
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
