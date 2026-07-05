@@ -54,10 +54,25 @@ const loginUser = async (userDetail) => {
     }
 }
 
+const getUserByEmailService = async (email) => {
+    const existingUser = await User.findOne({
+        where: { email: email }
+    });
+
+    if (!existingUser) {
+        const error = new Error('User not found with this email...');
+        error.statusCode = 444; // विशिष्ट एरर कोड ताकि फ्रंटएंड पहचान सके
+        throw error;
+    }
+
+    return existingUser;
+}
+
 
 module.exports = {
     createUser,
     loginUser,
+    getUserByEmailService
     
 
 }

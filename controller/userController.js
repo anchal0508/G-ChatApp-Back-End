@@ -1,5 +1,5 @@
 
-const { createUser, loginUser } = require('../services/userServices');
+const { createUser, loginUser , getUserByEmailService} = require('../services/userServices');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -64,6 +64,35 @@ const login = async (req, res, next) => {
     }
 }
 
+const getUserByEmail = async (req, res, next) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email field is required"
+            });
+        }
+
+        const { getUserByEmailService } = require('../services/userServices');
+        const otherUser = await getUserByEmailService(email);
+
+        otherUser.password = undefined;
+
+        return res.status(200).json({
+            success: true,
+            user: otherUser,
+            currentUser: req.user 
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
 const profile = async (req, res, next) => {
     try {
 
@@ -87,5 +116,6 @@ const profile = async (req, res, next) => {
 module.exports = {
     addUser,
     login,
-    profile
+    profile,
+    getUserByEmail
 }
